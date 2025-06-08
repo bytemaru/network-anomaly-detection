@@ -1,0 +1,3 @@
+=== Summary of 10 Runs ===
+Accuracy: min = 0.9447, max = 0.9485, mean = 0.9459, std = 0.0011
+Avg Runtime: 2.33 sec
