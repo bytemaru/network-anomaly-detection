@@ -1,3 +1,33 @@
+Test Accuracy: 0.95
+Runtime: 3.73
+
+Test Accuracy: 0.95
+Runtime: 2.35
+
+Test Accuracy: 0.95
+Runtime: 2.22
+
+Test Accuracy: 0.95
+Runtime: 2.19
+
+Test Accuracy: 0.94
+Runtime: 2.15
+
+Test Accuracy: 0.95
+Runtime: 2.14
+
+Test Accuracy: 0.94
+Runtime: 2.21
+
+Test Accuracy: 0.95
+Runtime: 2.10
+
+Test Accuracy: 0.95
+Runtime: 2.13
+
+Test Accuracy: 0.95
+Runtime: 2.10
+
 === Summary of 10 Runs ===
 Accuracy: min = 0.9447, max = 0.9485, mean = 0.9459, std = 0.0011
 Avg Runtime: 2.33 sec
