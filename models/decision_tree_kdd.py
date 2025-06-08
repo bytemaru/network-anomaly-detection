@@ -1,9 +1,6 @@
 import time
 import numpy as np
 
-import findspark
-findspark.init()
-
 from pyspark import SparkFiles
 
 from pyspark.sql import SparkSession
@@ -15,9 +12,8 @@ from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 
 spark = SparkSession.builder.appName("Decision Tree Model").getOrCreate()
 
-spark.sparkContext.addFile("dataset.csv")
 
-df = spark.read.csv(SparkFiles.get("dataset.csv"), header=False, inferSchema=True)
+df = spark.read.csv("here  goes the path", header=False, inferSchema=True)
 
 # Step 1: Convert label (string) to numeric
 label_indexer = StringIndexer(inputCol="_c41", outputCol="label")
