@@ -55,6 +55,7 @@ pipeline = Pipeline(stages=indexers + encoders + [assembler, lr])
 evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
 
 results = []
+
 for i in range(10):
     seed = random.randint(1, 9999)
     train_data, test_data = df.randomSplit([0.7, 0.3], seed=seed)
@@ -62,27 +63,37 @@ for i in range(10):
     start = time.time()
     model = pipeline.fit(train_data)
     end = time.time()
+    train_time = round(end - start, 2)
 
-    predictions = model.transform(test_data)
-    accuracy = evaluator.evaluate(predictions)
-    runtime = round(end - start, 2)
-    results.append((seed, accuracy, runtime))
-    print(f"Run {i + 1} - Seed: {seed}, Accuracy: {accuracy:.4f}, Time: {runtime}s")
+    train_predictions = model.transform(train_data)
+    test_predictions = model.transform(test_data)
 
-accuracies = [acc for _, acc, _ in results]
-times = [t for _, _, t in results]
+    train_accuracy = evaluator.evaluate(train_predictions)
+    test_accuracy = evaluator.evaluate(test_predictions)
 
-print("\n=== All Seed Results ===")
-print(f"{'Run':<5} {'Seed':<6} {'Accuracy':<10} {'Time(s)':<8}")
-for i, (seed, acc, runtime) in enumerate(results, start=1):
-    print(f"{i:<5} {seed:<6} {acc:<10.4f} {runtime:<8.2f}")
+    results.append((seed, train_accuracy, test_accuracy, train_time))
+
+    print(f"Run {i + 1} - Seed: {seed}")
+    print(f"   Train Accuracy: {train_accuracy:.4f}")
+    print(f"   Test Accuracy:  {test_accuracy:.4f}")
+    print(f"   Train Time:     {train_time}s\n")
+
+train_accuracies = [acc for _, acc, _, _ in results]
+test_accuracies = [acc for _, _, acc, _ in results]
+train_times = [t for _, _, _, t in results]
+
+print("\n=== Per-Run Results ===")
+print(f"{'Run':<5} {'Seed':<6} {'Train Acc':<10} {'Test Acc':<10} {'Time(s)':<8}")
+for i, (seed, train_acc, test_acc, t) in enumerate(results, 1):
+    print(f"{i:<5} {seed:<6} {train_acc:<10.4f} {test_acc:<10.4f} {t:<8.2f}")
 
 print("\n=== Summary Metrics ===")
-print(f"Max Accuracy: {max(accuracies):.4f}")
-print(f"Min Accuracy: {min(accuracies):.4f}")
-print(f"Avg Accuracy: {statistics.mean(accuracies):.4f}")
-print(f"Std Dev Accuracy: {statistics.stdev(accuracies):.4f}")
-print(f"Avg Runtime: {statistics.mean(times):.2f}s")
+print(f"Train Accuracy - Max: {max(train_accuracies):.4f}, Min: {min(train_accuracies):.4f}, "
+      f"Avg: {statistics.mean(train_accuracies):.4f}, Std Dev: {statistics.stdev(train_accuracies):.4f}")
 
-# Stop Spark session
+print(f"Test Accuracy  - Max: {max(test_accuracies):.4f}, Min: {min(test_accuracies):.4f}, "
+      f"Avg: {statistics.mean(test_accuracies):.4f}, Std Dev: {statistics.stdev(test_accuracies):.4f}")
+
+print(f"Average Training Time: {statistics.mean(train_times):.2f}s")
+
 spark.stop()
