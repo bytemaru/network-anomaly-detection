@@ -1,0 +1,19 @@
+=== All Seed Results ===
+Run   Seed   Accuracy   Time(s)
+1     2215   0.9382     6.24
+2     282    0.9395     3.63
+3     6838   0.9386     3.41
+4     4654   0.9364     3.35
+5     245    0.9429     3.13
+6     2616   0.9428     3.09
+7     4522   0.9451     3.12
+8     3647   0.9466     3.22
+9     5827   0.9415     3.12
+10    5649   0.9426     3.11
+
+=== Summary Metrics ===
+Max Accuracy: 0.9466
+Min Accuracy: 0.9364
+Avg Accuracy: 0.9414
+Std Dev Accuracy: 0.0032
+Avg Runtime: 3.54s
