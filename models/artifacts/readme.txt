@@ -12,8 +12,13 @@ This project implements and evaluates two machine learning models — a Decision
 
 ## Contents
 
-- decision_tree_kdd.py
-- logistic_regression_kdd.py
+- models/
+  - decision_tree_kdd.py
+  - logistic_regression_kdd.py
+- data/
+  - kdd.csv
+  - kdd_newdata.csv (created after preprocessing for logistic_regression_kdd)
+
 
 ---
 
@@ -37,7 +42,14 @@ foo@bar:~$ need java8
 foo@bar:~$ hdfs dfs -mkdir -p /user/insert_correct_username/kdd
 foo@bar:~$ hdfs dfs -put dataset.csv /user/insert_correct_username/kdd/
 ```
-
+- For executing logistic_regression_kdd
+Ensure the dataset and code are in the following structure:
+~/prj_kdd/
+├── models/
+│ ├── decision_tree_kdd.py
+│ └── logistic_regression_kdd.py
+├── data/
+│ ├── kdd.csv
 ---
 
 ## 2. Verify the dataset is successfully transferred:
@@ -55,6 +67,10 @@ df = spark.read.csv("hdfs:///user/insert_correct_username/kdd/dataset.csv", head
 ```
 
 and insert valid path.
+
+For executing logistic_regression_kdd, Copy files from your local system to the ECS cluster for :
+
+scp -r /path/to/project/ maragahari@barretts.ecs.vuw.ac.nz:~/
 
 ## 3. Activate Spark env
 
@@ -89,8 +105,22 @@ Url https://github.com/apache/spark
 Type --help for more information.
 ```
 
+For executing logistic_regression_kdd, Make sure Spark is available and add it to your path:
+
+export SPARK_HOME=/local/spark3/spark-3.5.1-bin-hadoop3
+export PATH=$SPARK_HOME/bin:$PATH
+
 ## 4. Submit Spark job
 
 ```console
 foo@bar:~$ spark-submit decision_tree_kdd.py
 ```
+For executing logistic_regression_kdd, run the logistic regression training script
+
+spark-submit models/logistic_regression_kdd.py
+
+Make sure that the script points to the correct local file path:
+
+base_dir = "/home/maragahari/prj_kdd/data"
+input_file = os.path.join(base_dir, "kdd.csv")
+cleaned_file = os.path.join(base_dir, "kdd_newdata.csv")
