@@ -27,19 +27,32 @@ num_features = 40
 assembler = VectorAssembler(inputCols=[f"_c{i}"for i in range(num_features)], outputCol="features")
 data = assembler.transform(data)
 
-# Step 3: Split data into train and test data
-train_data, test_data = data.randomSplit([0.7, 0.3], seed=42)
+accuracies = []
+runtimes = []
 
-# Step 4: Create the classifier
-dt_classifier = DecisionTreeClassifier(labelCol="label", featuresCol="features")
+for i in range(10):
+    start_time = time.time()
 
-# Step 5: train the model
-model = dt_classifier.fit(train_data)
+    # Step 3: Split data into train and test data
+    train_data, test_data = data.randomSplit([0.7, 0.3], seed=42)
 
-# Step 6: test the model
-predictions = model.transform(test_data)
+    # Step 4: Create the classifier
+    dt_classifier = DecisionTreeClassifier(labelCol="label", featuresCol="features")
 
-evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-accuracy = evaluator.evaluate(predictions)
+    # Step 5: train the model
+    model = dt_classifier.fit(train_data)
 
-print(f"Test Accuracy: {accuracy:.2f}")
+    # Step 6: test the model
+    predictions = model.transform(test_data)
+
+    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+    accuracy = evaluator.evaluate(predictions)
+
+    end_time = time.time()
+
+    # Step 7: Store looped data
+    accuracies.append(accuracy)
+    runtimes.append(end_time - start_time)
+
+    print(f"Test Accuracy: {accuracy:.2f}")
+    print(f"Runtime: {end_time - start_time:.2f}")
