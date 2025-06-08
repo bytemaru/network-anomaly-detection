@@ -1,4 +1,5 @@
 import time
+import numpy as np
 
 import findspark
 findspark.init()
@@ -34,7 +35,7 @@ for i in range(10):
     start_time = time.time()
 
     # Step 3: Split data into train and test data
-    train_data, test_data = data.randomSplit([0.7, 0.3], seed=42)
+    train_data, test_data = data.randomSplit([0.7, 0.3], seed=int(time.time()) % 1000 + i)
 
     # Step 4: Create the classifier
     dt_classifier = DecisionTreeClassifier(labelCol="label", featuresCol="features")
@@ -56,3 +57,9 @@ for i in range(10):
 
     print(f"Test Accuracy: {accuracy:.2f}")
     print(f"Runtime: {end_time - start_time:.2f}")
+
+# Step 8: Calculating min, max, avg and st deviation + avg runtime
+print("\n=== Summary of 10 Runs ===")
+print(f"Accuracy: min = {np.min(accuracies):.4f}, max = {np.max(accuracies):.4f}, "
+      f"mean = {np.mean(accuracies):.4f}, std = {np.std(accuracies):.4f}")
+print(f"Avg Runtime: {np.mean(runtimes):.2f} sec")
