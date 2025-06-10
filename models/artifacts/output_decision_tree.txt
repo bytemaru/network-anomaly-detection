@@ -1,33 +1,45 @@
-Test Accuracy: 0.95
-Runtime: 3.73
-
-Test Accuracy: 0.95
-Runtime: 2.35
-
-Test Accuracy: 0.95
-Runtime: 2.22
-
-Test Accuracy: 0.95
-Runtime: 2.19
-
-Test Accuracy: 0.94
-Runtime: 2.15
-
-Test Accuracy: 0.95
-Runtime: 2.14
-
-Test Accuracy: 0.94
-Runtime: 2.21
-
-Test Accuracy: 0.95
-Runtime: 2.10
-
-Test Accuracy: 0.95
-Runtime: 2.13
-
-Test Accuracy: 0.95
-Runtime: 2.10
+Run 1 - Seed: 9374
+   Train Accuracy: 0.9471
+   Test Accuracy:  0.9453
+   Train Time:     6.3851s
+Run 2 - Seed: 6826
+   Train Accuracy: 0.9487
+   Test Accuracy:  0.9472
+   Train Time:     3.8624s
+Run 3 - Seed: 4678
+   Train Accuracy: 0.9462
+   Test Accuracy:  0.9467
+   Train Time:     3.4910s
+Run 4 - Seed: 7508
+   Train Accuracy: 0.9456
+   Test Accuracy:  0.9455
+   Train Time:     3.3120s
+Run 5 - Seed: 4400
+   Train Accuracy: 0.9461
+   Test Accuracy:  0.9456
+   Train Time:     3.2653s
+Run 6 - Seed: 7560
+   Train Accuracy: 0.9471
+   Test Accuracy:  0.9475
+   Train Time:     3.3248s
+Run 7 - Seed: 6729
+   Train Accuracy: 0.9465
+   Test Accuracy:  0.9461
+   Train Time:     2.2216s
+Run 8 - Seed: 383
+   Train Accuracy: 0.9550
+   Test Accuracy:  0.9523
+   Train Time:     3.2103s
+Run 9 - Seed: 5257
+   Train Accuracy: 0.9560
+   Test Accuracy:  0.9531
+   Train Time:     1.5417s
+Run 10 - Seed: 7970
+   Train Accuracy: 0.9474
+   Test Accuracy:  0.9433
+   Train Time:     1.5419s
 
 === Summary of 10 Runs ===
-Accuracy: min = 0.9447, max = 0.9485, mean = 0.9459, std = 0.0011
-Avg Runtime: 2.33 sec
+Test Accuracy: min = 0.9433, max = 0.9531, mean = 0.9473, std = 0.0029
+Train Accuracy: min = 0.9456, max = 0.9560, mean = 0.9486, std = 0.0036
+Avg Runtime: 3.2156 sec

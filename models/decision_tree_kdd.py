@@ -60,7 +60,7 @@ for i in range(10):
     print(f"Run {i + 1} - Seed: {seed}")
     print(f"   Train Accuracy: {train_accuracy:.4f}")
     print(f"   Test Accuracy:  {test_accuracy:.4f}")
-    print(f"   Train Time:     {end_time - start_time:.2f}s\n")
+    print(f"   Train Time:     {end_time - start_time:.4f}s\n")
 
 # Step 8: Calculating min, max, avg and st deviation + avg runtime
 print("\n=== Summary of 10 Runs ===")
@@ -68,4 +68,4 @@ print(f"Test Accuracy: min = {np.min(test_accuracies):.4f}, max = {np.max(test_a
       f"mean = {np.mean(test_accuracies):.4f}, std = {np.std(test_accuracies):.4f}")
 print(f"Train Accuracy: min = {np.min(train_accuracies):.4f}, max = {np.max(train_accuracies):.4f}, "
       f"mean = {np.mean(train_accuracies):.4f}, std = {np.std(train_accuracies):.4f}")
-print(f"Avg Runtime: {np.mean(runtimes):.2f} sec")
+print(f"Avg Runtime: {np.mean(runtimes):.4f} sec")
