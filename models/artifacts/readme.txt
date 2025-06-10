@@ -27,14 +27,20 @@ This project implements and evaluates two machine learning models — a Decision
 These instructions assume you're working on the ECS Hadoop/Spark cluster (e.g., `co246a-1.ecs.vuw.ac.nz`) and that your environment has Spark and HDFS available.
 
 You must also have:
-- Uploaded `dataset.csv` to your HDFS folder. Uploaded python scripts to the same folder. We used scp to copy from our local machines:
+- Uploaded `dataset.csv` to your HDFS folder. Uploaded python scripts to the same folder. We used scp to copy from our local machines, where these files are stored:
 
  ```console
 foo@bar:~$ scp dataset.csv insert_correct_username@barretts.ecs.vuw.ac.nz:~
 foo@bar:~$ scp decision_tree_kdd.py insert_correct_username@barretts.ecs.vuw.ac.nz:~
 ```
 
-Transfer data file to the hadoop cluster. Check that env is configured:
+Transfer data file to the hadoop cluster. Shh to the cluster with HDFS and Spark:
+
+ ```console
+foo@bar:~$ ssh co246a-1
+```
+
+Check that env is configured:
 
 ```console
 foo@bar:~$ source HadoopSetup.csh
@@ -60,7 +66,7 @@ foo@bar:~$ hdfs dfs -ls /user/insert_correct_username/kdd
 
 You shall see the dataset.csv if everything is correct.
 
-Fix the path INSIDE the script. Find the line:
+Fix the path INSIDE the script decision_tree_kdd.py. Find the line:
 
 ```console
 df = spark.read.csv("hdfs:///user/insert_correct_username/kdd/dataset.csv", header=False, inferSchema=True)
